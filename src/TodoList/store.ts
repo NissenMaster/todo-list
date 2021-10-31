@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useCallback, useState, useLayoutEffect } from
 const store: Record<string, Dispatch<SetStateAction<any>>[]> = {};
 
 export const useTodoList = (namespace: string) => {
-  const [state, setState] = useState<Record<string, any>>();
+  const [state, setState] = useState<Record<string, any>[]>([{ key: '1', text: '1212121212' }]);
   useLayoutEffect(() => {
     store[namespace] = [...(store[namespace] || []), setState];
     return () => {
@@ -21,5 +21,5 @@ export const useTodoList = (namespace: string) => {
     },
     [namespace]
   );
-  return [state, dispatchAll];
+  return [state, dispatchAll] as [Record<string, any>[], Function];
 };

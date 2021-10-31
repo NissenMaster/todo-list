@@ -1,16 +1,25 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import Input from '../components/Input';
+import Item, { Wrapper } from './Item';
+import { useTodoList } from './store';
 
-const Content = () => {
+const Content: FC = () => {
+  const [list = [], setList]: [Record<string, any>[], any] = useTodoList('nissen');
+  console.log(`list`, list);
   return (
-    <div>
-      <div>
+    <section>
+      <Wrapper>
         <Input />
-      </div>
-      <div>输入框</div>
-      <div>输入框</div>
-      <div>输入框</div>
-    </div>
+      </Wrapper>
+      {list.map((item: Record<string, any>) => {
+        const { key, text } = item;
+        return <Item key={key} text={text} />;
+      })}
+      <Item text="131313131313" />
+      <Item text="141414141414" />
+      <Item text="151515151515" />
+      <Item text="1616161161616" />
+    </section>
   );
 };
 
